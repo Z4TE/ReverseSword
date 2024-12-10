@@ -1,0 +1,4 @@
+name: ReverseSword
+version: '1.0'
+main: org.z4te.reverseSword.Main
+api-version: '1.21'
