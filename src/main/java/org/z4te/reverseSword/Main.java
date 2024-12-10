@@ -2,8 +2,10 @@ package org.z4te.reverseSword;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
@@ -23,6 +25,7 @@ public final class Main extends JavaPlugin implements Listener {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+        HandlerList.unregisterAll();
     }
 
     public static Main getInstance() {
@@ -38,7 +41,7 @@ public final class Main extends JavaPlugin implements Listener {
                 event.setCancelled(true);
                 player.damage(event.getDamage());
 
-                Vector knockBack = player.getLocation().getDirection().multiply(-1).setY(0.125);
+                Vector knockBack = player.getLocation().getDirection().multiply(-1).setY(0.1);
                 player.setVelocity(knockBack);
             }
         }
@@ -51,6 +54,11 @@ public final class Main extends JavaPlugin implements Listener {
                 || container.has(Keys.REVERSE_NETHERITE_SWORD)
                 || container.has(Keys.REVERSE_STONE_SWORD)
                 || container.has(Keys.REVERSE_WOODEN_SWORD);
+    }
+
+    @EventHandler
+    public void onPlayerDeath (PlayerDeathEvent event) {
+
     }
 
 }
